@@ -1,4 +1,8 @@
 {
+
+  "scripts": {
+    "test": "mocha"
+  },
   "requires": true,
   "lockfileVersion": 1,
   "dependencies": {

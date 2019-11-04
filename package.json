@@ -1,7 +1,6 @@
 {
-
   "scripts": {
-    "test": "mocha"
+    "test": "mocha --require @babel/register 'test/*.js'"
   },
   "requires": true,
   "lockfileVersion": 1,
@@ -35,6 +34,9 @@
     }
   },
   "devDependencies": {
+    "@babel/core": "^7.6.4",
+    "@babel/preset-env": "^7.6.3",
+    "@babel/register": "^7.6.2",
     "enzyme": "^3.10.0",
     "mocha": "^6.2.2"
   }

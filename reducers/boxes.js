@@ -1,4 +1,4 @@
-const boxes = (state = [], action) => {
+const boxes = (state = undefined, action) => {
   switch(action.type) {
     case 'CREATE_NEW_BOX':
       var defaultbox = {};
@@ -14,10 +14,16 @@ const boxes = (state = [], action) => {
       defaultbox.color = new String("");
       defaultbox.color.error = "required";
 
-      return [...state, defaultbox]
+      return defaultbox;
+    case 'SET_RECIPIENT_NAME':
+      var recipient_name = new String(action.name.trim());
+      if(!recipient_name.toString()) {
+        recipient_name.error = "required";
+      }
+      return {...state, recipient_name: recipient_name};
+    default:
+        return state
   }
-
-  return state
 }
 
 export default boxes;

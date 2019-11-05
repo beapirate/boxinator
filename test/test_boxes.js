@@ -70,7 +70,35 @@ describe('reucers/boxes', () => {
       var state = boxes(initstate, {type: "SET_RECIPIENT_NAME", name: "Test"});
       assert.equal(state.recipient_name.error, undefined);
     })
+  })
 
+  describe("should handle SET_DESTINATION_COUNTRY", () => {
+    var initstate = boxes(undefined, { type: 'CREATE_NEW_BOX' })
 
+    it("should update destination country property", () => {
+      var state = boxes(initstate, {type: "SET_DESTINATION_COUNTRY", name: "Test"});
+      assert.equal(state.destination_country, "Test");
+    })
+
+    it("should flag empty contry name as invalid", () => {
+      var state = boxes(initstate, {type: "SET_DESTINATION_COUNTRY", name: ""});
+      assert.equal(state.destination_country.error, "required");
+    })
+
+    it("should flag non existing country as invalid", () => {
+      var state = boxes(initstate, {type: "SET_DESTINATION_COUNTRY", name: "Test"});
+      assert.equal(state.destination_country.error, "invalid");
+    })
+
+    it("should accept valid country name with case variation and surrounding whitespace", () => {
+      var state = boxes(initstate, {type: "SET_DESTINATION_COUNTRY", name: "Sweden"});
+      assert.equal(state.destination_country.error, undefined);
+
+      var state = boxes(initstate, {type: "SET_DESTINATION_COUNTRY", name: "sweden"});
+      assert.equal(state.destination_country.error, undefined);
+
+      var state = boxes(initstate, {type: "SET_DESTINATION_COUNTRY", name: " Sweden"});
+      assert.equal(state.destination_country.error, undefined);
+    })
   })
 })

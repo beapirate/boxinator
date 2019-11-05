@@ -1,3 +1,13 @@
+const isValidDestinationCountry = (name) => {
+  const valid = [
+    "Australia",
+    "Brazil",
+    "China",
+    "Sweden"
+  ].map(i => i.toLowerCase());
+  return valid.indexOf(name.toLowerCase()) > -1;
+}
+
 const boxes = (state = undefined, action) => {
   switch(action.type) {
     case 'CREATE_NEW_BOX':
@@ -15,12 +25,23 @@ const boxes = (state = undefined, action) => {
       defaultbox.color.error = "required";
 
       return defaultbox;
+
     case 'SET_RECIPIENT_NAME':
       var recipient_name = new String(action.name.trim());
       if(!recipient_name.toString()) {
         recipient_name.error = "required";
       }
       return {...state, recipient_name: recipient_name};
+
+    case 'SET_DESTINATION_COUNTRY':
+          var destination_country = new String(action.name.trim());
+          if(!destination_country.toString()) {
+            destination_country.error = "required";
+          }
+          else if(!isValidDestinationCountry(destination_country.toString())) {
+            destination_country.error = "invalid";
+          }
+          return {...state, destination_country: destination_country};
     default:
         return state
   }

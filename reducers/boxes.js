@@ -1,3 +1,5 @@
+import { isNumber } from "util";
+
 const isValidDestinationCountry = (name) => {
   const valid = [
     "Australia",
@@ -42,6 +44,26 @@ const boxes = (state = undefined, action) => {
             destination_country.error = "invalid";
           }
           return {...state, destination_country: destination_country};
+
+    case 'SET_WEIGHT':
+      var weight = new String(action.weight.trim());
+      if(!weight.toString()) {
+        weight.error = "required";
+      }
+
+      if(!/^\d+([\.,]\d+)?$/.test(weight)) {
+        weight.error = "invalid";
+      }
+
+      var decimalfixed = weight.replace(",", ".");
+      var num = Number.parseFloat(decimalfixed.toString());
+      if(Number.isNaN(num)) {
+        weight.error = "invalid"
+      }
+
+      weight.numeric = num;
+      return {...state, weight: weight};
+
     default:
         return state
   }

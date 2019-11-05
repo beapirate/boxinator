@@ -48,6 +48,7 @@ describe('reucers/boxes', () => {
 
   })
 
+
   describe("should handle SET_RECIPIENT_NAME", () => {
     var initstate = boxes(undefined, { type: 'CREATE_NEW_BOX' })
 
@@ -71,6 +72,7 @@ describe('reucers/boxes', () => {
       assert.equal(state.recipient_name.error, undefined);
     })
   })
+
 
   describe("should handle SET_DESTINATION_COUNTRY", () => {
     var initstate = boxes(undefined, { type: 'CREATE_NEW_BOX' })
@@ -99,6 +101,48 @@ describe('reucers/boxes', () => {
 
       var state = boxes(initstate, {type: "SET_DESTINATION_COUNTRY", name: " Sweden"});
       assert.equal(state.destination_country.error, undefined);
+    })
+  })
+
+
+  describe("should handle SET_WEIGHT action", () => {
+    var initstate = boxes(undefined, { type: 'CREATE_NEW_BOX' })
+
+    it("should update weight property", () => {
+      var state = boxes(initstate, {type: "SET_WEIGHT", weight: "0.0"});
+      assert.equal(state.weight, "0.0");
+    })
+
+    it("should not allow freetext value", () => {
+      var state = boxes(initstate, {type: "SET_WEIGHT", weight: "text"});
+      assert.equal(state.weight, "text");
+      assert.equal(state.weight.error, "invalid");
+    })
+
+    it("should allow integer formatted number", () => {
+      var state = boxes(initstate, {type: "SET_WEIGHT", weight: "1"});
+      assert.equal(state.weight, "1");
+      assert.equal(state.weight.error, undefined);
+    })
+
+    it("should allow decimals", () => {
+      var state = boxes(initstate, {type: "SET_WEIGHT", weight: "1.1"});
+      assert.equal(state.weight, "1.1");
+      assert.equal(state.weight.numeric, 1.1);
+      assert.equal(state.weight.error, undefined);
+    })
+
+    it("should allow comma as decimal separator", () => {
+      var state = boxes(initstate, {type: "SET_WEIGHT", weight: "1,1"});
+      assert.equal(state.weight, "1,1");
+      assert.equal(state.weight.numeric, 1.1);
+      assert.equal(state.weight.error, undefined);
+    })
+
+    it("should not allow text as decimal", () => {
+      var state = boxes(initstate, {type: "SET_WEIGHT", weight: "1.ee"});
+      assert.equal(state.weight, "1.ee");
+      assert.equal(state.weight.error, "invalid");
     })
   })
 })

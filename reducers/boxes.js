@@ -69,7 +69,18 @@ const boxes = (state = undefined, action) => {
       return {...state, weight: weight};
 
     case 'SET_BOX_COLOR':
-      return {...state, color: action.color};
+      var color = action.color;
+
+      if(!Array.isArray(color)) {
+        color.error = "invalid";
+      }
+      else if(color.length != 3) {
+        color.error = "invalid";
+      }
+      else if(!color.every(i => i > -1 && i < 256)) {
+        color.error = "invalid";
+      }
+      return {...state, color: color};
 
     default:
         return state

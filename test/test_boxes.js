@@ -160,5 +160,22 @@ describe('reucers/boxes', () => {
       var state = boxes(initstate, {type: "SET_BOX_COLOR", color: [0, 0, 0]});
       assert.equal(state.color.toString(), [0, 0, 0].toString());
     })
+
+    it("should validate input type and array length", () => {
+      var state = boxes(initstate, {type: "SET_BOX_COLOR", color: {}});
+      assert.equal(state.color.error, "invalid");
+
+      var state = boxes(initstate, {type: "SET_BOX_COLOR", color: [0, 0]});
+      assert.equal(state.color.error, "invalid");
+    })
+
+    it("should validate rgb values range", () => {
+      var state = boxes(initstate, {type: "SET_BOX_COLOR", color: [-1, 0, 0]});
+      assert.equal(state.color.error, "invalid");
+
+      var state = boxes(initstate, {type: "SET_BOX_COLOR", color: [0, 0, 256]});
+      assert.equal(state.color.error, "invalid");
+
+    })
   })
 })

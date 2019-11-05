@@ -175,7 +175,35 @@ describe('reucers/boxes', () => {
 
       var state = boxes(initstate, {type: "SET_BOX_COLOR", color: [0, 0, 256]});
       assert.equal(state.color.error, "invalid");
+    })
 
+    it("should not allow blue boxes", () => {
+      var state = boxes(initstate, {type: "SET_BOX_COLOR", color: [0, 0, 255]});
+      assert.equal(state.color.error, "blue");
+
+      var state = boxes(initstate, {type: "SET_BOX_COLOR", color: [0, 255, 255]});
+      assert.equal(state.color.error, "blue");
+
+      var state = boxes(initstate, {type: "SET_BOX_COLOR", color: [64, 0, 255]});
+      assert.equal(state.color.error, "blue");
+    })
+
+    it("should allow red and green boxes", () => {
+      var state = boxes(initstate, {type: "SET_BOX_COLOR", color: [255, 0, 0]});
+      assert.equal(state.color.error, undefined);
+
+      var state = boxes(initstate, {type: "SET_BOX_COLOR", color: [0, 255, 0]});
+      assert.equal(state.color.error, undefined);
+    })
+
+    it("should allow purple box", () => {
+      var state = boxes(initstate, {type: "SET_BOX_COLOR", color: [128, 0, 255]});
+      assert.equal(state.color.error, undefined);
+    })
+
+    it("should allow green box", () => {
+      var state = boxes(initstate, {type: "SET_BOX_COLOR", color: [0, 255, 191]});
+      assert.equal(state.color.error, undefined);
     })
   })
 })

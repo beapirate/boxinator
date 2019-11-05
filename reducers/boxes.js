@@ -1,4 +1,5 @@
 import { isNumber } from "util";
+import { rgb2hsv, hsv2hsl } from '@swiftcarrot/color-fns';
 
 const isValidDestinationCountry = (name) => {
   const valid = [
@@ -8,6 +9,14 @@ const isValidDestinationCountry = (name) => {
     "Sweden"
   ].map(i => i.toLowerCase());
   return valid.indexOf(name.toLowerCase()) > -1;
+}
+
+const isBlue = (r, g, b) => {
+  // See https://www.w3schools.com/colors/colors_picker.asp
+  // Blue range is between 180 and 255 (imo)
+  var hsv = rgb2hsv(r, g, b);
+  var hsl = hsv2hsl(hsv.h, hsv.s, hsv.v);
+  return hsl.h >= 180 && hsl.h <= 255;
 }
 
 const boxes = (state = undefined, action) => {
@@ -80,6 +89,11 @@ const boxes = (state = undefined, action) => {
       else if(!color.every(i => i > -1 && i < 256)) {
         color.error = "invalid";
       }
+      else if(isBlue(color[0], color[1], color[2])) {
+        color.error = "blue";
+      }
+
+
       return {...state, color: color};
 
     default:

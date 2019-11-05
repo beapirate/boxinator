@@ -144,5 +144,21 @@ describe('reucers/boxes', () => {
       assert.equal(state.weight, "1.ee");
       assert.equal(state.weight.error, "invalid");
     })
+
+    it("should not allow negative weight", () => {
+      var state = boxes(initstate, {type: "SET_WEIGHT", weight: "-1"});
+      assert.equal(state.weight, "-1");
+      assert.equal(state.weight.error, "negative");
+    })
+  })
+
+
+  describe("should handle SET_BOX_COLOR action", () => {
+    var initstate = boxes(undefined, { type: 'CREATE_NEW_BOX' })
+
+    it("should update color property", () => {
+      var state = boxes(initstate, {type: "SET_BOX_COLOR", color: [0, 0, 0]});
+      assert.equal(state.color.toString(), [0, 0, 0].toString());
+    })
   })
 })

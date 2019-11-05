@@ -51,7 +51,7 @@ const boxes = (state = undefined, action) => {
         weight.error = "required";
       }
 
-      if(!/^\d+([\.,]\d+)?$/.test(weight)) {
+      if(!/^-?\d+([\.,]\d+)?$/.test(weight)) {
         weight.error = "invalid";
       }
 
@@ -61,8 +61,15 @@ const boxes = (state = undefined, action) => {
         weight.error = "invalid"
       }
 
+      if(num < 0) {
+        weight.error  = "negative";
+      }
+
       weight.numeric = num;
       return {...state, weight: weight};
+
+    case 'SET_BOX_COLOR':
+      return {...state, color: action.color};
 
     default:
         return state

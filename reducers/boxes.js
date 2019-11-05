@@ -36,14 +36,14 @@ const boxes = (state = undefined, action) => {
       return {...state, recipient_name: recipient_name};
 
     case 'SET_DESTINATION_COUNTRY':
-          var destination_country = new String(action.name.trim());
-          if(!destination_country.toString()) {
-            destination_country.error = "required";
-          }
-          else if(!isValidDestinationCountry(destination_country.toString())) {
-            destination_country.error = "invalid";
-          }
-          return {...state, destination_country: destination_country};
+        var destination_country = new String(action.name.trim());
+        if(!destination_country.toString()) {
+          destination_country.error = "required";
+        }
+        else if(!isValidDestinationCountry(destination_country.toString())) {
+          destination_country.error = "invalid";
+        }
+        return {...state, destination_country: destination_country};
 
     case 'SET_WEIGHT':
       var weight = new String(action.weight.trim());

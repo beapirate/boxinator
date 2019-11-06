@@ -1,0 +1,8 @@
+node_modules/
+.gradle/
+api/.gradle
+api/.project
+api/.settings
+api/.classpath
+api/bin
+api/build

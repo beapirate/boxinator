@@ -10,6 +10,8 @@ RUN apt-get install -y software-properties-common && \
     apt-get update && \
     apt-get install -y adoptopenjdk-8-hotspot
 RUN apt-get install -y gradle
+# Packaged npm version is old enough to generate warnings about node version being unsupported
+RUN npm install -g npm@latest && apt-get remove -y npm
 RUN mkdir /src
 WORKDIR /src
 EXPOSE 8080

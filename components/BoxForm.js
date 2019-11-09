@@ -6,16 +6,16 @@ const BoxForm = ({ box, onRecipientNameChange, onBoxWeightChange, onColorChange,
         <div>
             <form>
                 Name<br />
-                <input type="text" value={box.recipient_name} onChange={onRecipientNameChange} />
+                <input type="text" id="box-recipientName" value={box.recipient_name} onChange={onRecipientNameChange} />
 
                 <br />Weight<br/ >
-                <input type="text" value={box.weight} onChange={onBoxWeightChange}/>
+                <input type="text" id="box-weight" value={box.weight} onChange={onBoxWeightChange}/>
 
                 <br />Box color<br />
-                <input type="text" value={box.color} onChange={onColorChange} />
+                <input type="text" id="box-color" value={box.color} onChange={onColorChange} />
 
                 <br />Country<br />
-                <input type="text" value={box.destination_country} onChange={onDestinationCountryChange}/>
+                <input type="text" id="box-destinationCountry" value={box.destination_country} onChange={onDestinationCountryChange}/>
 
                 <br />
                 <input type="submit" value="Save" />

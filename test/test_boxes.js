@@ -1,5 +1,6 @@
 import boxes from '../reducers/boxes.js';
 import assert from 'assert';
+import sinon from 'sinon';
 
 describe('reucers/boxes', () => {
 
@@ -205,5 +206,32 @@ describe('reucers/boxes', () => {
       var state = boxes(initstate, {type: "SET_BOX_COLOR", color: [0, 255, 191]});
       assert.equal(state.color.error, undefined);
     })
+  })
+
+  describe("Should handle SAVE_ERROR action", () => {
+    var initstate = boxes(undefined, {type: 'CREATE_NEW_BOX' });
+
+    it("Should not throw exception on empty error list", () => {
+      boxes(initstate, { type: "SAVE_ERROR", response: { errors: []} });
+    })
+
+    it("Should set error from server on recipient name error property", () => {
+      var state = boxes(initstate, { type: "SAVE_ERROR", response: { errors: [
+          {property: "recipient_name", error: "servererror1" }
+      ]} });
+      assert.equal(state.recipient_name.error, "servererror1");
+    })
+
+    it("Should log error to console if invalid property name is received", () => {
+      var console_error = sinon.spy(console, "error");
+      var state = boxes(initstate, { type: "SAVE_ERROR", response: { errors: [
+        {property: "invalid_name", error: "servererror2" }
+      ]} });
+
+      console_error.restore() //XXX - use test fixtures..
+      assert.equal(console_error.callCount, 1);
+    })
+
+
   })
 })

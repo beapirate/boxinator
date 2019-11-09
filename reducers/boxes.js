@@ -22,6 +22,9 @@ const boxes = (state = undefined, action) => {
   switch(action.type) {
     case 'CREATE_NEW_BOX':
       var defaultbox = {};
+
+      defaultbox.saved = false;
+
       defaultbox. recipient_name = new String("");
       defaultbox.recipient_name.error = "required";
 
@@ -94,6 +97,25 @@ const boxes = (state = undefined, action) => {
 
 
       return {...state, color: color};
+
+    case "SAVE_ERROR":
+      var response = action.response;
+      var next = {...state};
+
+      for (let i = 0; i < response.errors.length; i++) {
+        const validprops = ["recipient_name", "weight", "color", "destination_country"];
+        const propname = response.errors[i].property
+
+        if(validprops.indexOf(propname) < 0) {
+          console.error("Unknown property " + propname + " when handling SAVE_ERROR action");
+        }
+
+        var value = new String(next[propname]);
+        value.error = response.errors[i].error
+        next[propname] = value;
+      }
+
+      return next;
 
     default:
         return state

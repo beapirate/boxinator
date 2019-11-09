@@ -1,7 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import {rgb2hex } from '@swiftcarrot/color-fns';
 
 const BoxForm = ({ box, onRecipientNameChange, onBoxWeightChange, onColorChange, onDestinationCountryChange}) => {
+
+    const boxColorHex = box.color != undefined ? rgb2hex(box.color[0], box.color[1], box.color[2]) : "#000000";
+
     return (
         <div>
             <form>
@@ -13,6 +17,7 @@ const BoxForm = ({ box, onRecipientNameChange, onBoxWeightChange, onColorChange,
 
                 <br />Box color<br />
                 <input type="text" id="box-color" value={box.color} onChange={onColorChange} />
+                <span style={{ color: boxColorHex }} >X</span>
 
                 <br />Country<br />
                 <input type="text" id="box-destinationCountry" value={box.destination_country} onChange={onDestinationCountryChange}/>

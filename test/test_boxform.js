@@ -29,12 +29,10 @@ describe('components', () => {
             assert(enzymeWrapper.html().includes("1.0"), enzymeWrapper.html())
         })
 
-        /*
         it("Should include color of box in output", () => {
-            const { enzymeWrapper } = setup({ "color": [0,0,0] })
-            assert(enzymeWrapper.html().includes("#000000"), enzymeWrapper.html())
+            const { enzymeWrapper } = setup({box: { "color": [1,1,1] }})
+            assert(enzymeWrapper.html().includes("#010101"), enzymeWrapper.html())
         })
-        */
 
         it("Should include destination country of box in output", () => {
             const { enzymeWrapper } = setup({box: { "destination_country": "Sweden" }})
@@ -69,23 +67,5 @@ describe('components', () => {
             enzymeWrapper.find("#box-destinationCountry").simulate('change', { });
             assert.equal(fn.callCount, 1);
         })
-
-        /*
-           onRecipientNameChange: e => {
-            dispatch({type: "SET_RECIPIENT_NAME", name: e.target.value})
-        },
-
-        onBoxWeightChange: e => {
-            dispatch({type: "SET_WEIGHT", weight: e.target.value})
-        },
-
-        onColorChange: e => {
-            dispatch({type: "SET_BOX_COLOR", color: e.target.value})
-        },
-
-        onDestinationCountryChange: e => {
-            dispatch({type: "SET_DESTINATION_COUNTRY", name: e.target.value})
-        }
-        */
     })
 })

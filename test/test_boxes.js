@@ -232,6 +232,16 @@ describe('reucers/boxes', () => {
       assert.equal(console_error.callCount, 1);
     })
 
+    it("Should not not consider saved status a valid property", () => {
+      var state = boxes(initstate, { type: "SAVE_ERROR", response: { errors: [
+        {property: "saved", error: true }
+      ]} });
+      assert.equal(state.saved, false);
+    })
+  })
 
+
+  describe("Should handle SAVE_SUCCESS action", () => {
+    
   })
 })

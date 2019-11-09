@@ -108,6 +108,7 @@ const boxes = (state = undefined, action) => {
 
         if(validprops.indexOf(propname) < 0) {
           console.error("Unknown property " + propname + " when handling SAVE_ERROR action");
+          continue;
         }
 
         var value = new String(next[propname]);

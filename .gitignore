@@ -6,3 +6,4 @@ api/.settings
 api/.classpath
 api/bin
 api/build
+dist/

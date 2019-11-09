@@ -16,6 +16,8 @@ const BoxForm = ({ box, onRecipientNameChange, onBoxWeightChange, onColorChange,
 
                 Country<br />
                 <input type="text" value={box.destination_country} onChange={onDestinationCountryChange}/>
+
+                <input type="submit" value="Save" />
             </form>
         </div>
     )

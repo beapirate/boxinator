@@ -5,18 +5,19 @@ const BoxForm = ({ box, onRecipientNameChange, onBoxWeightChange, onColorChange,
     return (
         <div>
             <form>
-                Name<br/>
+                Name<br />
                 <input type="text" value={box.recipient_name} onChange={onRecipientNameChange} />
 
-                Weight<br/>
+                <br />Weight<br/ >
                 <input type="text" value={box.weight} onChange={onBoxWeightChange}/>
 
-                Box color<br/>
+                <br />Box color<br />
                 <input type="text" value={box.color} onChange={onColorChange} />
 
-                Country<br />
+                <br />Country<br />
                 <input type="text" value={box.destination_country} onChange={onDestinationCountryChange}/>
 
+                <br />
                 <input type="submit" value="Save" />
             </form>
         </div>
@@ -31,6 +32,21 @@ const mapStateToProps = state => {
   
   const mapDispatchToProps = dispatch => {
     return {
+        onRecipientNameChange: e => {
+            dispatch({type: "SET_RECIPIENT_NAME", name: e.target.value})
+        },
+
+        onBoxWeightChange: e => {
+            dispatch({type: "SET_WEIGHT", weight: e.target.value})
+        },
+
+        onColorChange: e => {
+            dispatch({type: "SET_BOX_COLOR", color: e.target.value})
+        },
+
+        onDestinationCountryChange: e => {
+            dispatch({type: "SET_DESTINATION_COUNTRY", name: e.target.value})
+        }
     }
   }
 

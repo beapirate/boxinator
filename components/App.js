@@ -2,7 +2,7 @@ import React from 'react'
 import BoxForm from '../components/BoxForm'
 
 const App = () => (
-  <div>
+  <div class="app">
     <BoxForm />
   </div>
 )

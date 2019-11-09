@@ -11,23 +11,23 @@ const BoxForm = ({ box, onRecipientNameChange, onBoxWeightChange, onColorChange,
             <form>
                 Name<br />
                 <input type="text" id="box-recipientName" value={box.recipient_name} onChange={onRecipientNameChange}
-                    className={ box.recipient_name != undefined && box.recipient_name.error != undefined ?  "box-form-error" : ""}
+                    className={ box.recipient_name != undefined && box.recipient_name.error != undefined ?  "box-form-error" : "box-form-valid"}
                 />
 
                 <br />Weight <br />
                 <input type="text" id="box-weight" value={box.weight} onChange={onBoxWeightChange}
-                    className={ box.weight != undefined && box.weight.error != undefined ? "box-form-error" : "" }
+                    className={ box.weight != undefined && box.weight.error != undefined ? "box-form-error" : "box-form-valid" }
                 />
 
                 <br />Box color<br />
                 <input type="text" id="box-color" value={box.color} onChange={onColorChange}
-                    className={ box.color != undefined && box.color.error != undefined ? "box-form-error" : "" }
+                    className={ box.color != undefined && box.color.error != undefined ? "box-form-error" : "box-form-valid" }
                 />
                 <span style={{ color: boxColorHex }} >X</span>
 
                 <br />Country<br />
                 <input type="text" id="box-destinationCountry" value={box.destination_country} onChange={onDestinationCountryChange}
-                    className={ box.destination_country != undefined && box.destination_country.error != undefined ? "box-form-error" : "" }
+                    className={ box.destination_country != undefined && box.destination_country.error != undefined ? "box-form-error" : "box-form-valid" }
                 />
 
                 <br />

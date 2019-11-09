@@ -68,6 +68,14 @@ describe('components', () => {
             assert.equal(fn.callCount, 1);
         })
 
+        it("Should include box-form-valid and no box-form-error if no properties have errors", () => {
+            var { enzymeWrapper } = setup({box : {}})
+            const noError = enzymeWrapper.html();
+
+            assert(noError.indexOf("box-form-error") < 0);
+            assert(noError.indexOf("box-form-valid") >= 0);
+        })
+
         var setError = (value, err) => {
             const obj = new String(value);
             obj.error = err;
@@ -83,7 +91,6 @@ describe('components', () => {
             assert(noError.indexOf("box-form-error") < 0);
             assert(withError.indexOf("box-form-error") >= 0);
         })
-
 
         it("Should not generate same output if recipient_property has error", () => {
             var { enzymeWrapper } = setup({box : { "recipient_name": "RecipientName1" }})

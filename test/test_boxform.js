@@ -67,5 +67,57 @@ describe('components', () => {
             enzymeWrapper.find("#box-destinationCountry").simulate('change', { });
             assert.equal(fn.callCount, 1);
         })
+
+        var setError = (value, err) => {
+            const obj = new String(value);
+            obj.error = err;
+            return obj;
+        }
+
+        it("Should only include box-form-error class in output if property has error", () => {
+            var { enzymeWrapper } = setup({box : { "recipient_name": "RecipientName1" }})
+            const noError = enzymeWrapper.html();
+            var { enzymeWrapper } = setup({box : { "recipient_name": setError("RecipientName1", "invalid") }})
+            const withError = enzymeWrapper.html();
+
+            assert(noError.indexOf("box-form-error") < 0);
+            assert(withError.indexOf("box-form-error") >= 0);
+        })
+
+
+        it("Should not generate same output if recipient_property has error", () => {
+            var { enzymeWrapper } = setup({box : { "recipient_name": "RecipientName1" }})
+            const noError = enzymeWrapper.html();
+            var { enzymeWrapper } = setup({box : { "recipient_name": setError("RecipientName1", "invalid") }})
+            const withError = enzymeWrapper.html();
+            assert.notEqual(withError, noError);
+        })
+
+        it("Should not generate same output if weight property has error", () => {
+            var { enzymeWrapper } = setup({box : { "weight": "0.1" }})
+            const noError = enzymeWrapper.html();
+            var { enzymeWrapper } = setup({box : { "weight": setError("0.1", "invalid") }})
+            const withError = enzymeWrapper.html();
+            assert.notEqual(withError, noError);
+        })
+
+        it("Should not generate same output if color property has error", () => {
+            var { enzymeWrapper } = setup({box : { "color": [0,0,254] }})
+            const noError = enzymeWrapper.html();
+            var { enzymeWrapper } = setup({box : { "color": setError([0,0,254], "blue") }})
+            const withError = enzymeWrapper.html();
+            assert.notEqual(withError, noError);
+        })
+
+        it("Should not generate same output if destination country property has error", () => {
+            var { enzymeWrapper } = setup({box : { "destination_country": "Norway" }})
+            const noError = enzymeWrapper.html();
+            var { enzymeWrapper } = setup({box : { "destination_country": setError("Norway", "invalid") }})
+            const withError = enzymeWrapper.html();
+            assert.notEqual(withError, noError);
+        })
+
+
+
     })
 })

@@ -68,6 +68,13 @@ describe('components', () => {
             assert.equal(fn.callCount, 1);
         })
 
+        it("Should invoke onSave on Save click", () => {
+            var fn = sinon.spy();
+            const { enzymeWrapper } = setup({box: {}, "onSave": fn })
+            enzymeWrapper.find("#box-save").simulate('click', { });
+            assert.equal(fn.callCount, 1);
+        })
+
         it("Should include box-form-valid and no box-form-error if no properties have errors", () => {
             var { enzymeWrapper } = setup({box : {}})
             const noError = enzymeWrapper.html();

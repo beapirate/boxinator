@@ -61,7 +61,6 @@ public class BoxController {
         }
 
 
-
         if(errors.Exists()) {
             return ResponseEntity.badRequest().body(errors);
         }

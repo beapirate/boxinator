@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import {rgb2hex } from '@swiftcarrot/color-fns';
 
-const BoxForm = ({ box, onRecipientNameChange, onBoxWeightChange, onColorChange, onDestinationCountryChange}) => {
+const BoxForm = ({ box, onRecipientNameChange, onBoxWeightChange, onColorChange, onDestinationCountryChange, onSave}) => {
 
     const boxColorHex = box.color != undefined && box.color.length == 3 ? rgb2hex(box.color[0], box.color[1], box.color[2]) : "#000000";
 
@@ -31,7 +31,7 @@ const BoxForm = ({ box, onRecipientNameChange, onBoxWeightChange, onColorChange,
                 />
 
                 <br />
-                <input type="submit" value="Save" />
+                <input type="submit" id="box-save" value="Save" onClick={onSave} />
             </form>
         </div>
     )
@@ -59,7 +59,12 @@ const mapStateToProps = state => {
 
         onDestinationCountryChange: e => {
             dispatch({type: "SET_DESTINATION_COUNTRY", name: e.target.value})
+        },
+
+        onSave: e => {
+            console.error("onSave action not implemented.")
         }
+
     }
   }
 

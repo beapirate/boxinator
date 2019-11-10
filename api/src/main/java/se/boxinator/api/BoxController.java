@@ -39,9 +39,21 @@ class BoxValidationErrors {
 @RestController
 public class BoxController {
 
+    private final BoxDatabaseService db;
+
+    public BoxController(BoxDatabaseService db) {
+        this.db = db;
+    }
+
+    @RequestMapping(value="/api/ping", method=RequestMethod.GET)
+    public ResponseEntity<?> Ping() {
+        return ResponseEntity.ok().body(db.ping());
+    }
+
     @RequestMapping(value="/api/box", method=RequestMethod.POST, consumes={"application/json"})
     public ResponseEntity<?> Save(@RequestBody BoxFormModel box) {
         BoxValidationErrors errors = new BoxValidationErrors();
+
 
         if(!StringUtils.hasText(box.recipient_name)) {
             errors.AddError("recipient_name", "empty");

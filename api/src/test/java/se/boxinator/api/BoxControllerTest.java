@@ -5,6 +5,13 @@ import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.hasSize;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import org.springframework.boot.test.mock.mockito.MockBean;
+import static org.mockito.Mockito.when;
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.beans.Transient;
+
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
 import org.junit.Test;
@@ -25,6 +32,9 @@ public class BoxControllerTest {
     @Autowired
     private MockMvc mvc;
 
+    @MockBean
+    private BoxDatabaseService dbMock;
+
     @Test
     public void postEmpty() throws Exception {
         mvc.perform(MockMvcRequestBuilders.post("/api/box")
@@ -33,5 +43,13 @@ public class BoxControllerTest {
             .accept(MediaType.APPLICATION_JSON_UTF8))
             .andExpect(status().is(400))
             .andExpect(jsonPath("$.errors[*].property",  containsInAnyOrder("recipient_name", "weight", "color", "destination_country")));
+    }
+
+    @Test
+    public void mockPing() throws Exception {
+        when(dbMock.ping()).thenReturn("pang");
+        mvc.perform(MockMvcRequestBuilders.get("/api/ping"))
+            .andExpect(status().isOk())
+            .andExpect(content().string(equalTo("pang")));
     }
 }

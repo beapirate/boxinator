@@ -1,3 +1,7 @@
+import { combineReducers } from 'redux'
 import newbox from './newbox.js'
+import boxes from './boxes.js'
 
-export default boxes
+
+const rootReducer = combineReducers({newbox, boxes});
+export default rootReducer;

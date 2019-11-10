@@ -18,26 +18,37 @@ const isBlue = (r, g, b) => {
   return hsl.h >= 180 && hsl.h <= 255;
 }
 
-const newbox = (state = undefined, action) => {
+
+const createdefaultbox = () => {
+  var defaultbox = {};
+
+  defaultbox.saved = false;
+
+  defaultbox. recipient_name = new String("");
+  defaultbox.recipient_name.error = "required";
+
+  defaultbox.weight = new String("0.0");
+  defaultbox.weight.error = "required";
+
+  defaultbox.destination_country = new String("");
+  defaultbox.destination_country.error = "required";
+
+  defaultbox.color = new String("");
+  defaultbox.color.error = "required";
+
+  return defaultbox;
+}
+
+
+const newbox = (state, action) => {
+
+  if(state == undefined) {
+    state = createdefaultbox();
+  }
+
   switch(action.type) {
     case 'CREATE_NEW_BOX':
-      var defaultbox = {};
-
-      defaultbox.saved = false;
-
-      defaultbox. recipient_name = new String("");
-      defaultbox.recipient_name.error = "required";
-
-      defaultbox.weight = new String("0.0");
-      defaultbox.weight.error = "required";
-
-      defaultbox.destination_country = new String("");
-      defaultbox.destination_country.error = "required";
-
-      defaultbox.color = new String("");
-      defaultbox.color.error = "required";
-
-      return defaultbox;
+      return createdefaultbox();
 
     case 'SET_RECIPIENT_NAME':
       var recipient_name = new String(action.name.trim());

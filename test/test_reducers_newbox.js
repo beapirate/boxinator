@@ -4,10 +4,6 @@ import sinon from 'sinon';
 
 describe('reucers/newbox', () => {
 
-  it('should have no initial state', () => {
-    assert.equal(newbox(undefined, {}), undefined)
-  })
-
   describe('should handle CREATE_NEW_BOX', () => {
     var state = newbox(undefined, { type: 'CREATE_NEW_BOX' })
 

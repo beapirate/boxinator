@@ -43,7 +43,7 @@ const BoxForm = ({ box, onRecipientNameChange, onBoxWeightChange, onColorChange,
 
 const mapStateToProps = state => {
     return {
-      box: state
+      box: state.newbox
     }
   }
   

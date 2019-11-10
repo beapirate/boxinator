@@ -18,7 +18,7 @@ const isBlue = (r, g, b) => {
   return hsl.h >= 180 && hsl.h <= 255;
 }
 
-const boxes = (state = undefined, action) => {
+const newbox = (state = undefined, action) => {
   switch(action.type) {
     case 'CREATE_NEW_BOX':
       var defaultbox = {};
@@ -118,9 +118,10 @@ const boxes = (state = undefined, action) => {
 
       return next;
 
+    
     default:
         return state
   }
 }
 
-export default boxes;
+export default newbox;

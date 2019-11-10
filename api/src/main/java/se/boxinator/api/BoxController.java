@@ -51,13 +51,16 @@ public class BoxController {
     }
 
     @RequestMapping(value="/api/box", method=RequestMethod.POST, consumes={"application/json"})
-    public ResponseEntity<?> Save(@RequestBody BoxFormModel box) {
+    public ResponseEntity<?> Save(@RequestBody BoxModel box) {
         BoxValidationErrors errors = new BoxValidationErrors();
 
 
+        if(box.box_id >= 0) {
+            errors.AddError("box_id", "box_id property not allowed when creating a new box");
+        }
+
         if(!StringUtils.hasText(box.recipient_name)) {
             errors.AddError("recipient_name", "empty");
-            
         }
 
         if(!(box.weight > 0)) {

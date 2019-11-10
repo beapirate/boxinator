@@ -46,6 +46,16 @@ public class BoxControllerTest {
     }
 
     @Test
+    public void postWithBoxID() throws Exception {
+        mvc.perform(MockMvcRequestBuilders.post("/api/box")
+            .contentType(MediaType.APPLICATION_JSON_UTF8)
+            .content("{ \"box_id\": 1 }")
+            .accept(MediaType.APPLICATION_JSON_UTF8))
+            .andExpect(status().is(400))
+            .andExpect(jsonPath("$.errors[*].property",  containsInAnyOrder("box_id", "recipient_name", "weight", "color", "destination_country")));
+    }
+
+    @Test
     public void mockPing() throws Exception {
         when(dbMock.ping()).thenReturn("pang");
         mvc.perform(MockMvcRequestBuilders.get("/api/ping"))

@@ -13,22 +13,26 @@ const BoxForm = ({ box, onRecipientNameChange, onBoxWeightChange, onColorChange,
                 <input type="text" id="box-recipientName" value={box.recipient_name} onChange={onRecipientNameChange}
                     className={ box.recipient_name != undefined && box.recipient_name.error != undefined ?  "box-form-error" : "box-form-valid"}
                 />
+                <span> {box.recipient_name && box.recipient_name.error} </span>
 
                 <br />Weight <br />
                 <input type="text" id="box-weight" value={box.weight} onChange={onBoxWeightChange}
                     className={ box.weight != undefined && box.weight.error != undefined ? "box-form-error" : "box-form-valid" }
                 />
+                <span> {box.weight && box.weight.error} </span>
 
                 <br />Box color<br />
                 <input type="text" id="box-color" value={box.color} onChange={onColorChange}
                     className={ box.color != undefined && box.color.error != undefined ? "box-form-error" : "box-form-valid" }
                 />
                 <span style={{ color: boxColorHex }} >X</span>
+                <span> {box.color && box.color.error} </span>
 
                 <br />Country<br />
                 <input type="text" id="box-destinationCountry" value={box.destination_country} onChange={onDestinationCountryChange}
                     className={ box.destination_country != undefined && box.destination_country.error != undefined ? "box-form-error" : "box-form-valid" }
                 />
+                <span> {box.destination_country && box.destination_country.error} </span>
 
                 <br />
                 <input type="submit" id="box-save" value="Save" onClick={onSave} />

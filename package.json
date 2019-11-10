@@ -1,7 +1,7 @@
 {
   "scripts": {
     "test": "mocha --require @babel/register 'test/*.js'",
-    "build": "webpack && cp static/index.html dist/index.html"
+    "build": "webpack && cp static/index.html static/index.css dist/"
   },
   "requires": true,
   "lockfileVersion": 1,

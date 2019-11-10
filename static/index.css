@@ -1,0 +1,7 @@
+.box-form-error {
+    background-color: salmon;
+}
+
+.box-form-valid {
+    background-color: lawngreen;;
+}

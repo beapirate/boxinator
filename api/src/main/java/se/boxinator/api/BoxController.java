@@ -55,6 +55,7 @@ public class BoxController {
         BoxValidationErrors errors = new BoxValidationErrors();
 
 
+        // XXX - move this business logic out of here...
         if(box.box_id >= 0) {
             errors.AddError("box_id", "box_id property not allowed when creating a new box");
         }
@@ -80,6 +81,7 @@ public class BoxController {
             return ResponseEntity.badRequest().body(errors);
         }
 
-        return ResponseEntity.status(201).build();
+        // XXX - return object created by service (with box_id set)
+        return ResponseEntity.status(201).body(box);
     }
 }

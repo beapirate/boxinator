@@ -39,9 +39,9 @@ class BoxValidationErrors {
 @RestController
 public class BoxController {
 
-    private final BoxDatabaseService db;
+    private final BoxService db;
 
-    public BoxController(BoxDatabaseService db) {
+    public BoxController(BoxService db) {
         this.db = db;
     }
 
@@ -51,9 +51,8 @@ public class BoxController {
     }
 
     @RequestMapping(value="/api/box", method=RequestMethod.POST, consumes={"application/json"})
-    public ResponseEntity<?> Save(@RequestBody BoxModel box) {
+    public ResponseEntity<?> Save(@RequestBody BoxModel box)  {
         BoxValidationErrors errors = new BoxValidationErrors();
-
 
         // XXX - move this business logic out of here...
         if(box.box_id >= 0) {
@@ -81,7 +80,9 @@ public class BoxController {
             return ResponseEntity.badRequest().body(errors);
         }
 
+        BoxModel created = db.Insert(box);
+
         // XXX - return object created by service (with box_id set)
-        return ResponseEntity.status(201).body(box);
+        return ResponseEntity.status(201).body(created);
     }
 }

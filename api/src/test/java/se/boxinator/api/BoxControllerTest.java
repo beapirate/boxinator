@@ -100,21 +100,21 @@ public class BoxControllerTest {
 
     @Test
     public void listAll() throws Exception {
-            mvc.perform(MockMvcRequestBuilders.post("/api/box")
-                .contentType(MediaType.APPLICATION_JSON_UTF8)
-                .content("{"
-                    + "\"recipient_name\": \"test2\","
-                    + "\"weight\": 1.1,"
-                    + "\"color\": \"#121212\","
-                    + "\"destination_country\": \"sweden\""
-                    + "}")
-                .accept(MediaType.APPLICATION_JSON_UTF8))
-                .andExpect(status().isCreated());
+        mvc.perform(MockMvcRequestBuilders.post("/api/box")
+            .contentType(MediaType.APPLICATION_JSON_UTF8)
+            .content("{"
+                + "\"recipient_name\": \"test2\","
+                + "\"weight\": 1.1,"
+                + "\"color\": \"#121212\","
+                + "\"destination_country\": \"sweden\""
+                + "}")
+            .accept(MediaType.APPLICATION_JSON_UTF8))
+            .andExpect(status().isCreated());
 
-            mvc.perform(MockMvcRequestBuilders.get("/api/box")
-                .accept(MediaType.APPLICATION_JSON_UTF8))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$[*].recipient_name", containsInAnyOrder("test2")));
+        mvc.perform(MockMvcRequestBuilders.get("/api/box")
+            .accept(MediaType.APPLICATION_JSON_UTF8))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$[*].recipient_name", containsInAnyOrder("test2")));
 
 
     }

@@ -65,13 +65,29 @@ const mapStateToProps = state => {
             dispatch({type: "SET_DESTINATION_COUNTRY", name: e.target.value})
         },
 
-        onSave: e => {
-            console.error("onSave action not implemented.")
-        }
-
+        dispatch: dispatch
     }
   }
 
-const ConnectedBoxForm = connect(mapStateToProps, mapDispatchToProps)(BoxForm)
+const mergeProps = (stateProps, dispatchProps, ownProps) => {
+    return {
+    ...ownProps,
+    ...stateProps,
+    ...dispatchProps,
+    onSave: e => {
+        e.preventDefault();
+        return fetch('/api/box', {
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(stateProps.box)
+        })
+        .then(response => response.json())
+        .then(json => dispatchProps.dispatch({type: "SAVE_SUCCESS", response: json}));
+    }}
+}
+
+const ConnectedBoxForm = connect(mapStateToProps, mapDispatchToProps, mergeProps)(BoxForm)
 export { BoxForm as UnconnectedBoxForm };
 export default ConnectedBoxForm;

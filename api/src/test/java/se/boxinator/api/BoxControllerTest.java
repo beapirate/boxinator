@@ -3,6 +3,7 @@ package se.boxinator.api;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.greaterThan;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -90,7 +91,31 @@ public class BoxControllerTest {
                 + "}")
             .accept(MediaType.APPLICATION_JSON_UTF8))
             .andExpect(status().isCreated())
-            .andExpect(jsonPath("$.recipient_name",  equalTo("test1")));
+            .andExpect(jsonPath("$.recipient_name",  equalTo("test1")))
+            .andExpect(jsonPath("$.box_id", greaterThan(0)))
+            ;
         verify(dbMock).Insert(any(BoxModel.class));
+    }
+
+
+    @Test
+    public void listAll() throws Exception {
+            mvc.perform(MockMvcRequestBuilders.post("/api/box")
+                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .content("{"
+                    + "\"recipient_name\": \"test2\","
+                    + "\"weight\": 1.1,"
+                    + "\"color\": \"#121212\","
+                    + "\"destination_country\": \"sweden\""
+                    + "}")
+                .accept(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(status().isCreated());
+
+            mvc.perform(MockMvcRequestBuilders.get("/api/box")
+                .accept(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[*].recipient_name", containsInAnyOrder("test2")));
+
+
     }
 }

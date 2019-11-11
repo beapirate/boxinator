@@ -50,6 +50,13 @@ public class BoxController {
         return ResponseEntity.ok().body(db.ping());
     }
 
+
+    @RequestMapping(value="/api/box", method=RequestMethod.GET, produces={"application/json"})
+    public ResponseEntity<?> ListAll() {
+        return ResponseEntity.ok().body(db.All());
+    }
+
+
     @RequestMapping(value="/api/box", method=RequestMethod.POST, consumes={"application/json"})
     public ResponseEntity<?> Save(@RequestBody BoxModel box)  {
         BoxValidationErrors errors = new BoxValidationErrors();

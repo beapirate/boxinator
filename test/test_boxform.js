@@ -56,8 +56,9 @@ describe('components', () => {
 
         it("Should invoke onColorChange on color update", () => {
             var fn = sinon.spy();
-            const { enzymeWrapper } = setup({box: {}, "onColorChange": fn })
-            enzymeWrapper.find("#box-color").simulate('change', { });
+            const { enzymeWrapper } = setup({box: {}, "onColorChange": fn });
+            // this is actually ChromePicker, but wrapper.debug() shows ColorPicker...
+            enzymeWrapper.find("ColorPicker").prop('onChange')(); // simulate('change', { });
             assert.equal(fn.callCount, 1);
         })
 

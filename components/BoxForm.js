@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {rgb2hex } from '@swiftcarrot/color-fns';
+import { rgb2hex } from '@swiftcarrot/color-fns';
+import { ChromePicker } from 'react-color';
+
 
 const BoxForm = ({ box, onRecipientNameChange, onBoxWeightChange, onColorChange, onDestinationCountryChange, onSave}) => {
 
@@ -22,11 +24,15 @@ const BoxForm = ({ box, onRecipientNameChange, onBoxWeightChange, onColorChange,
                 <span> {box.weight && box.weight.error} </span>
 
                 <br />Box color<br />
-                <input type="text" id="box-color" value={box.color} onChange={onColorChange}
+                <input type="text" id="box-color" value={box.color}
                     className={ box.color != undefined && box.color.error != undefined ? "box-form-error" : "box-form-valid" }
                 />
                 <span style={{ color: boxColorHex }} >X</span>
                 <span> {box.color && box.color.error} </span>
+
+                <ChromePicker color={boxColorHex} onChange={onColorChange} />
+
+
 
                 <br />Country<br />
                 <input type="text" id="box-destinationCountry" value={box.destination_country} onChange={onDestinationCountryChange}
@@ -57,8 +63,8 @@ const mapStateToProps = state => {
             dispatch({type: "SET_WEIGHT", weight: e.target.value})
         },
 
-        onColorChange: e => {
-            dispatch({type: "SET_BOX_COLOR", color: e.target.value})
+        onColorChange: (color, e) => {
+            dispatch({type: "SET_BOX_COLOR", color: [color.rgb.r, color.rgb.g, color.rgb.b]})
         },
 
         onDestinationCountryChange: e => {

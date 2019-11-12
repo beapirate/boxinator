@@ -7,5 +7,15 @@ services:
     environment:
       MYSQL_DATABASE: "boxinator"
       MYSQL_RANDOM_ROOT_PASSWORD: "yes"
+      MYSQL_USER: "boxinator_test"
+      MYSQL_PASSWORD: "boxinator_test"
     tmpfs:
       - "/var/lib/mysql"
+  api:
+    build: "./api"
+    environment:
+      SPRING_PROFILES_ACTIVE: "test"
+    volumes:
+      - "./dist:/src/src/main/resources/static"
+    ports:
+      - "8080:8080"

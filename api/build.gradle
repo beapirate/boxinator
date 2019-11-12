@@ -23,8 +23,14 @@ repositories {
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
+bootRun {
+  environment SPRING_PROFILES_ACTIVE: environment.SPRING_PROFILES_ACTIVE ?: "test"
+}
+
 dependencies {
     compile("org.springframework.boot:spring-boot-starter-web")
+    implementation('org.springframework.boot:spring-boot-starter-data-jdbc')
+    implementation('org.mariadb.jdbc:mariadb-java-client')
     testCompile("junit:junit")
     testCompile("org.springframework.boot:spring-boot-starter-test")
 }

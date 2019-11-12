@@ -1,0 +1,11 @@
+version: "3"
+
+services:
+  
+  mariadb:
+    build: "./db"
+    environment:
+      MYSQL_DATABASE: "boxinator"
+      MYSQL_RANDOM_ROOT_PASSWORD: "yes"
+    tmpfs:
+      - "/var/lib/mysql"

@@ -16,6 +16,14 @@ services:
     environment:
       SPRING_PROFILES_ACTIVE: "test"
     volumes:
-      - "./dist:/src/src/main/resources/static"
+      - "static-files:/src/src/main/resources/static"
     ports:
       - "8080:8080"
+
+  web:
+    build: "./web"
+    volumes:
+      - "static-files:/src/dist"
+
+volumes:
+  static-files:

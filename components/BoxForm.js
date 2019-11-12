@@ -4,7 +4,7 @@ import { rgb2hex } from '@swiftcarrot/color-fns';
 import { ChromePicker } from 'react-color';
 
 
-const BoxForm = ({ box, onRecipientNameChange, onBoxWeightChange, onColorChange, onDestinationCountryChange, onSave}) => {
+const BoxForm = ({ box, onRecipientNameChange, onBoxWeightChange, onColorChange, onColorClick, onDestinationCountryChange, onSave}) => {
 
     const boxColorHex = box.color != undefined && box.color.length == 3 ? rgb2hex(box.color[0], box.color[1], box.color[2]) : "#000000";
 
@@ -24,15 +24,12 @@ const BoxForm = ({ box, onRecipientNameChange, onBoxWeightChange, onColorChange,
                 <span> {box.weight && box.weight.error} </span>
 
                 <br />Box color<br />
-                <input type="text" id="box-color" value={box.color}
+                <input type="text" id="box-color" value={box.color} onClick={onColorClick}
                     className={ box.color != undefined && box.color.error != undefined ? "box-form-error" : "box-form-valid" }
                 />
                 <span style={{ color: boxColorHex }} >X</span>
                 <span> {box.color && box.color.error} </span>
-
-                <ChromePicker color={boxColorHex} onChange={onColorChange} />
-
-
+                { box.colorPickerVisible && <ChromePicker color={boxColorHex} onChange={onColorChange} /> }
 
                 <br />Country<br />
                 <input type="text" id="box-destinationCountry" value={box.destination_country} onChange={onDestinationCountryChange}
@@ -67,6 +64,10 @@ const mapStateToProps = state => {
             dispatch({type: "SET_BOX_COLOR", color: [color.rgb.r, color.rgb.g, color.rgb.b]})
         },
 
+        onColorClick: (e) => {
+            dispatch({type: "TOGGLE_COLOR_PICKER"})
+        },
+
         onDestinationCountryChange: e => {
             dispatch({type: "SET_DESTINATION_COUNTRY", name: e.target.value})
         },
@@ -82,6 +83,8 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     ...dispatchProps,
     onSave: e => {
         e.preventDefault();
+        
+
         return fetch('/api/box', {
             method: 'post',
             headers: {

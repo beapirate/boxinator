@@ -204,6 +204,17 @@ describe('reucers/newbox', () => {
     })
   })
 
+
+  describe("Should handle TOGGLE_COLOR_PICKER action", () => {
+    var initstate = newbox(undefined, {});
+
+    it("Should set colorPickerVisible on first action", () => {
+      var state = newbox(initstate, {type: "TOGGLE_COLOR_PICKER"});
+      assert(state.colorPickerVisible);
+    })
+  })
+
+
   describe("Should handle SAVE_ERROR action", () => {
     var initstate = newbox(undefined, {type: 'CREATE_NEW_BOX' });
 

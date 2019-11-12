@@ -23,6 +23,7 @@ const createdefaultbox = () => {
   var defaultbox = {};
 
   defaultbox.saved = false;
+  defaultbox.colorPickerVisible = false;
 
   defaultbox. recipient_name = new String("");
   defaultbox.recipient_name.error = "required";
@@ -106,8 +107,10 @@ const newbox = (state, action) => {
         color.error = "blue";
       }
 
-
       return {...state, color: color};
+
+    case "TOGGLE_COLOR_PICKER":
+      return {...state, colorPickerVisible: !state.colorPickerVisible };
 
     case "SAVE_ERROR":
       var response = action.response;

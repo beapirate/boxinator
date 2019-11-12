@@ -56,7 +56,7 @@ describe('components', () => {
 
         it("Should invoke onColorChange on color update", () => {
             var fn = sinon.spy();
-            const { enzymeWrapper } = setup({box: {}, "onColorChange": fn });
+            const { enzymeWrapper } = setup({box: { colorPickerVisible: true }, "onColorChange": fn });
             // this is actually ChromePicker, but wrapper.debug() shows ColorPicker...
             enzymeWrapper.find("ColorPicker").prop('onChange')(); // simulate('change', { });
             assert.equal(fn.callCount, 1);
@@ -82,6 +82,19 @@ describe('components', () => {
 
             assert(noError.indexOf("box-form-error") < 0);
             assert(noError.indexOf("box-form-valid") >= 0);
+        })
+
+   
+        it("Should not include color picker if colorPickerVisible is not set", () => {
+            const { enzymeWrapper } = setup({box: { "colorPickerVisible": false } });
+            // this is actually ChromePicker, but wrapper.debug() shows ColorPicker...
+            assert.equal(enzymeWrapper.find("ColorPicker").length, 0);
+        })
+
+        it("Should include color picker if colorPickerVisible is set", () => {
+            const { enzymeWrapper } = setup({box: { "colorPickerVisible": true } });
+            // this is actually ChromePicker, but wrapper.debug() shows ColorPicker...
+            assert.equal(enzymeWrapper.find("ColorPicker").length, 1);
         })
 
         var setError = (value, err) => {

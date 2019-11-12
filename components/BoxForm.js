@@ -84,16 +84,41 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     onSave: e => {
         e.preventDefault();
         
+        const boxModel = {
+            recipient_name: (stateProps.box.recipient_name),
+            weight: Number.parseFloat(stateProps.box.weight),
+            color: rgb2hex(stateProps.box.color[0], stateProps.box.color[1], stateProps.box.color[2]),
+            destination_country: stateProps.box.destination_country
+        };
 
         return fetch('/api/box', {
             method: 'post',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
             },
-            body: JSON.stringify(stateProps.box)
+            body: JSON.stringify(boxModel)
         })
-        .then(response => response.json())
-        .then(json => dispatchProps.dispatch({type: "SAVE_SUCCESS", response: json}));
+        .then(response => {
+            const isJsonResponse = response.headers.get('content-type') &&
+                response.headers.get('content-type').indexOf('application/json') >= 0;
+
+            if(!isJsonResponse) {
+                // XXX - this should result in a server-error status to user
+                console.error("Expected to receive JSON data from API");
+                return;
+            }
+
+            response.json().then(json => {
+                if(response.ok) {
+                    dispatchProps.dispatch({type: "SAVE_SUCCESS", response: json})
+                }
+                else {
+                    console.error(json);
+                    dispatchProps.dispatch({type: "SAVE_ERROR", response: json});
+                }
+            })
+        });
     }}
 }
 

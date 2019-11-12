@@ -20,6 +20,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Primary;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -45,6 +46,7 @@ public class BoxControllerTest {
     static class BoxDatabasImplTestContextConfiguration {
 
         @Bean
+        @Primary
         public BoxDatabaseInterface boxDatabase() {
             return new BoxDatabaseTestImpl();
         }

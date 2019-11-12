@@ -20,7 +20,13 @@ public class BoxService {
         return db.ping();
     }
 
-    public BoxModel Insert(BoxModel box) {
+    public BoxModel Insert(BoxModel box) throws Exception {
+        BoxValidationErrors errors = Validate(box);
+
+        if(errors.Exists()) {
+            throw new Exception("invalid box");
+        }
+
         return db.Insert(box);
 
     }
@@ -33,7 +39,6 @@ public class BoxService {
 
         BoxValidationErrors errors = new BoxValidationErrors();
 
-        // XXX - move this business logic out of here...
         if(box.box_id >= 0) {
             errors.AddError("box_id", "box_id property not allowed when creating a new box");
         }

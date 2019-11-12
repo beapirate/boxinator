@@ -1,13 +1,7 @@
 package se.boxinator.api;
 
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -37,7 +31,7 @@ public class BoxController {
 
 
     @RequestMapping(value="/api/box", method=RequestMethod.POST, consumes={"application/json"})
-    public ResponseEntity<?> Save(@RequestBody BoxModel box)  {
+    public ResponseEntity<?> Save(@RequestBody BoxModel box) throws Exception {
 
         BoxValidationErrors errors = db.Validate(box);
 

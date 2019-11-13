@@ -3,8 +3,9 @@
 ```
 docker-compose build
 docker-compose up -d
-curl http://127.0.0.1:8080/api/ping
 ```
+
+[](http://127.0.0.1:8080/)
 
 Note that a tmpfs mount is used for mariadb data to ensure that the database is automatically _deleted_ up on restarts.
 

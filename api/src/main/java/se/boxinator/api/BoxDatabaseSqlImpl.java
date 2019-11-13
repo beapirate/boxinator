@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
+import org.springframework.context.annotation.Profile;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
@@ -12,6 +13,7 @@ import java.sql.SQLException;
 
 
 @Component
+@Profile("!test")
 public class BoxDatabaseSqlImpl implements BoxDatabaseInterface {
 
     private JdbcTemplate jdbc;

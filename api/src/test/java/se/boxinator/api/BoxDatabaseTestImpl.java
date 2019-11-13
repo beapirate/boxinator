@@ -1,11 +1,13 @@
 package se.boxinator.api;
 
 import org.springframework.stereotype.Component;
+import org.springframework.context.annotation.Profile;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Component
+@Profile("test")
 public class BoxDatabaseTestImpl implements BoxDatabaseInterface {
 
     private int serial = 0;

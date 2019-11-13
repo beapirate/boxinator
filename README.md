@@ -3,8 +3,9 @@
 ```
 docker-compose build
 docker-compose up -d
-curl http://127.0.0.1:8080/api/ping
 ```
+
+[http://127.0.0.1:8080/](http://127.0.0.1:8080/)
 
 Note that a tmpfs mount is used for mariadb data to ensure that the database is automatically _deleted_ up on restarts.
 
@@ -29,4 +30,4 @@ npm test
 cd api
 gradle test
 ```
-[api/src/main/java/se/boxinator/api](api/src/main/java/se/boxinator/api)
+[api/src/test/java/se/boxinator/api](api/src/test/java/se/boxinator/api)

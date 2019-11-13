@@ -29,4 +29,4 @@ npm test
 cd api
 gradle test
 ```
-[api/src/main/java/se/boxinator/api](api/src/main/java/se/boxinator/api)
+[api/src/test/java/se/boxinator/api](api/src/test/java/se/boxinator/api)

@@ -23,9 +23,5 @@ public class BoxServiceTest {
     @Test
     public void defaultEmptyTest() {
         assertEquals(0, service.All().size());
-
-
     }
-
-
 }

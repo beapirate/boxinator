@@ -39,6 +39,8 @@ public class BoxService {
 
         BoxValidationErrors errors = new BoxValidationErrors();
 
+        // The validation here _SHOULD_ matche the validation in ../web/reducers/newbox.js
+
         if(box.box_id >= 0) {
             errors.AddError("box_id", "box_id property not allowed when creating a new box");
         }

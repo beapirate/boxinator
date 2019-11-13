@@ -3,6 +3,7 @@ package se.boxinator.api;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
+
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -23,5 +24,10 @@ public class BoxServiceTest {
     @Test
     public void defaultEmptyTest() {
         assertEquals(0, service.All().size());
+    }
+
+    @Test(expected = Exception.class)
+    public void exceptionOnInvalidInput() throws Exception {
+        service.Insert(new BoxModel());
     }
 }

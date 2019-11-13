@@ -13,8 +13,6 @@ services:
       - "/var/lib/mysql"
   api:
     build: "./api"
-    environment:
-      SPRING_PROFILES_ACTIVE: "test"
     volumes:
       - "static-files:/src/src/main/resources/static"
     ports:

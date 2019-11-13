@@ -1,7 +1,7 @@
 {
   "scripts": {
     "test": "mocha --require @babel/register 'test/*.js'",
-    "build": "webpack && cp static/index.html static/index.css dist/"
+    "build": "webpack"
   },
   "requires": true,
   "lockfileVersion": 1,
@@ -39,6 +39,7 @@
     "@babel/preset-env": "^7.6.3",
     "@babel/preset-react": "^7.7.0",
     "@babel/register": "^7.6.2",
+    "copy-webpack-plugin": "^5.0.5",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.15.1",
     "mocha": "^6.2.2",

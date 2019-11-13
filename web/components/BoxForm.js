@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { rgb2hex } from '@swiftcarrot/color-fns';
 import { ChromePicker } from 'react-color';
+import { saveBoxToApi } from '../actions';
 
 
 const BoxForm = ({ box, onRecipientNameChange, onBoxWeightChange, onColorChange, onColorClick, onDestinationCountryChange, onSave}) => {
@@ -91,35 +92,9 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
             destination_country: stateProps.box.destination_country
         };
 
-        return fetch('/api/box', {
-            method: 'post',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
-            body: JSON.stringify(boxModel)
-        })
-        .then(response => {
-            const isJsonResponse = response.headers.get('content-type') &&
-                response.headers.get('content-type').indexOf('application/json') >= 0;
-
-            if(!isJsonResponse) {
-                // XXX - this should result in a server-error status to user
-                console.error("Expected to receive JSON data from API");
-                return;
-            }
-
-            response.json().then(json => {
-                if(response.ok) {
-                    dispatchProps.dispatch({type: "SAVE_SUCCESS", response: json})
-                }
-                else {
-                    console.error(json);
-                    dispatchProps.dispatch({type: "SAVE_ERROR", response: json});
-                }
-            })
-        });
-    }}
+        dispatchProps.dispatch(saveBoxToApi(boxModel));
+    }
+  }
 }
 
 const ConnectedBoxForm = connect(mapStateToProps, mapDispatchToProps, mergeProps)(BoxForm)

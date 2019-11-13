@@ -10,7 +10,7 @@ RUN npm install
 COPY components/ /src/components
 COPY reducers/ /src/reducers
 COPY static/ /src/static
-COPY index.js .babelrc webpack.config.js /src/
+COPY index.js actions.js .babelrc webpack.config.js /src/
 RUN find /src | grep -v node_modules
 RUN npm run-script build
 CMD npx webpack --watch

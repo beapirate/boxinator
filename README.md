@@ -22,8 +22,11 @@ npm install
 npm test
 ```
 
+[web/test](web/test)
+
 # Run Java tests
 ```
 cd api
 gradle test
 ```
+[api/src/main/java/se/boxinator/api](api/src/main/java/se/boxinator/api)

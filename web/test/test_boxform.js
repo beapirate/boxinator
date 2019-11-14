@@ -145,6 +145,10 @@ describe('components', () => {
             assert.notEqual(withError, noError);
         })
 
+        it("Should not enable submit buttton if errors are present", () => {
+            var { enzymeWrapper } = setup({box : { "destination_country": setError("Norway", "invalid") }})
+            assert(enzymeWrapper.find("#box-save").prop('disabled'));
+        })
 
 
     })

@@ -9,6 +9,13 @@ const BoxForm = ({ box, onRecipientNameChange, onBoxWeightChange, onColorChange,
 
     const boxColorHex = box.color != undefined && box.color.length == 3 ? rgb2hex(box.color[0], box.color[1], box.color[2]) : "#000000";
 
+    const validInputs = (
+        box.recipient_name != undefined && box.recipient_name.error == undefined &&
+        box.weight != undefined && box.weight.error == undefined &&
+        box.color != undefined && box.color.error == undefined &&
+        box.destination_country != undefined && box.destination_country.error == undefined 
+    );
+
     return (
         <div>
             <form>
@@ -39,7 +46,7 @@ const BoxForm = ({ box, onRecipientNameChange, onBoxWeightChange, onColorChange,
                 <span> {box.destination_country && box.destination_country.error} </span>
 
                 <br />
-                <input type="submit" id="box-save" value="Save" onClick={onSave} />
+                <input type="submit" id="box-save" value="Save" disabled={!validInputs} onClick={onSave} />
             </form>
         </div>
     )

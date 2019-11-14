@@ -2,9 +2,22 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 const BoxList = ({ boxes }) => {
-    return <ul>
-        {boxes.map(i => <li>{i.recipient_name}</li>)}
-    </ul>
+    return <table>
+        <tr>
+          <th>Receiver</th>
+          <th>Weight</th>
+          <th>Box color</th>
+          <th>Shipping cost</th>
+        </tr>
+        {boxes.map(i => {
+          return <tr>
+            <td>{i.recipient_name}</td>
+            <td>{i.weight} kilograms</td>
+            <td style={{ "background-color": i.color }}></td>
+            <td>SEK</td>
+          </tr>
+        })}
+    </table>
 }
 
 const mapStateToProps = state => {

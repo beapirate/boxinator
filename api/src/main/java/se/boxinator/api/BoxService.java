@@ -1,7 +1,9 @@
 package se.boxinator.api;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -10,6 +12,14 @@ import org.springframework.util.StringUtils;
 public class BoxService {
 
     private final BoxDatabaseInterface db;
+
+    private Map<String, Float> shippingCostMultipliers = new HashMap<String, Float>() {{
+        put("sweden", 1.3f);
+        put("china", 4.0f);
+        put("brazil", 8.6f);
+        put("australia", 7.3f);
+    }};
+
 
     public BoxService(BoxDatabaseInterface db) {
         this.db = db;
@@ -60,8 +70,15 @@ public class BoxService {
         if(!StringUtils.hasText(box.destination_country)) {
             errors.AddError("destination_country", "empty");
         }
+        else if(!shippingCostMultipliers.containsKey(box.destination_country.toLowerCase())) {
+            errors.AddError("destination_country", "invalid");
+        }
 
         return errors;
+    }
+
+    public float ComputeShippingCost(BoxModel box) {
+        return box.weight * shippingCostMultipliers.get(box.destination_country.toLowerCase());
     }
 }
 

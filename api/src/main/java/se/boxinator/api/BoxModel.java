@@ -6,4 +6,5 @@ public class BoxModel {
     public float weight;
     public String color;
     public String destination_country;
+    public float shipping_cost;
 }

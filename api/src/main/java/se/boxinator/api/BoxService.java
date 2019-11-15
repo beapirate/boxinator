@@ -42,7 +42,11 @@ public class BoxService {
     }
 
     public List<BoxModel> All() {
-        return db.All();
+        List<BoxModel> all = db.All();
+        for(BoxModel i : all) {
+            i.shipping_cost = ComputeShippingCost(i);
+        }
+        return all;
     }
 
     public BoxValidationErrors Validate(BoxModel box) {

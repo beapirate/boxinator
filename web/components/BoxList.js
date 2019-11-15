@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 const BoxList = ({ boxes }) => {
-    return <table>
+    return <table id="box-list">
         <tr>
           <th>Receiver</th>
           <th>Weight</th>

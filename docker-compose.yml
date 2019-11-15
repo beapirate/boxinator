@@ -22,6 +22,14 @@ services:
     build: "./web"
     volumes:
       - "static-files:/src/dist"
+  
+  cypress:
+    image: "cypress/included:3.6.1"
+    environment:
+      - CYPRESS_baseUrl=http://api:8080
+    working_dir: /e2e
+    volumes:
+      - ./test:/e2e
 
 volumes:
   static-files:

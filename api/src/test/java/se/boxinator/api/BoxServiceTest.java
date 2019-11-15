@@ -22,7 +22,7 @@ public class BoxServiceTest {
     private BoxService service;
 
     @Test
-    public void defaultEmptyTest() {
+    public void defaultEmptyTest() throws Exception {
         assertEquals(0, service.All().size());
     }
 
@@ -32,12 +32,12 @@ public class BoxServiceTest {
     }
 
     @Test(expected = Exception.class)
-    public void exceptionOnInvalidDestinationCountry() {
+    public void exceptionOnInvalidDestinationCountry() throws Exception {
         service.ComputeShippingCost(new BoxModel() {{ destination_country = "invalid"; }});
     }
 
     @Test
-    public void noExceptionOnValidCountryy() {
+    public void noExceptionOnValidCountryy() throws Exception {
         service.ComputeShippingCost(new BoxModel() {{ destination_country = "sweden"; }});
     }
 }

@@ -25,7 +25,7 @@ public class BoxController {
 
 
     @RequestMapping(value="/api/box", method=RequestMethod.GET, produces={"application/json"})
-    public ResponseEntity<?> ListAll() {
+    public ResponseEntity<?> ListAll() throws Exception {
         return ResponseEntity.ok().body(db.All());
     }
 

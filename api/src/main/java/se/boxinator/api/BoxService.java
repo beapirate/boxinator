@@ -41,7 +41,7 @@ public class BoxService {
 
     }
 
-    public List<BoxModel> All() {
+    public List<BoxModel> All() throws Exception {
         List<BoxModel> all = db.All();
         for(BoxModel i : all) {
             i.shipping_cost = ComputeShippingCost(i);
@@ -81,8 +81,23 @@ public class BoxService {
         return errors;
     }
 
-    public float ComputeShippingCost(BoxModel box) {
-        return box.weight * shippingCostMultipliers.get(box.destination_country.toLowerCase());
+    public float ComputeShippingCost(BoxModel box) throws Exception {
+        if(box == null) {
+            throw new Exception("box == null");
+        }
+
+        String country = box.destination_country;
+        if(!StringUtils.hasText(country)) {
+            throw new Exception("missing destination_country value");
+        }
+
+        country = country.toLowerCase();
+        Float multiplier = shippingCostMultipliers.get(country);
+        if(multiplier == null) {
+            throw new Exception("multiplier for " + country + " not found");
+        }
+
+        return box.weight * multiplier;
     }
 }
 

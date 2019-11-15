@@ -29,7 +29,7 @@ public class BoxDatabaseSqlImpl implements BoxDatabaseInterface {
     public BoxModel Insert(BoxModel box) {
         jdbc.update(
             "INSERT INTO boxes (recipient_name, box_weight, color, destination_country) VALUES (?, ?, ?, ?)",
-            box.recipient_name, box.weight, box.color, box.recipient_name);
+            box.recipient_name, box.weight, box.color, box.destination_country);
         return box;
     }
 

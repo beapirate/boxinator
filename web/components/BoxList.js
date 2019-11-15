@@ -14,7 +14,7 @@ const BoxList = ({ boxes }) => {
             <td>{i.recipient_name}</td>
             <td>{i.weight} kilograms</td>
             <td style={{ "background-color": i.color }}></td>
-            <td>SEK</td>
+            <td>{i.shipping_cost} SEK</td>
           </tr>
         })}
     </table>

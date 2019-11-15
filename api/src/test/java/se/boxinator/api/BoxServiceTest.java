@@ -30,4 +30,14 @@ public class BoxServiceTest {
     public void exceptionOnInvalidInput() throws Exception {
         service.Insert(new BoxModel());
     }
+
+    @Test(expected = Exception.class)
+    public void exceptionOnInvalidDestinationCountry() {
+        service.ComputeShippingCost(new BoxModel() {{ destination_country = "invalid"; }});
+    }
+
+    @Test
+    public void noExceptionOnValidCountryy() {
+        service.ComputeShippingCost(new BoxModel() {{ destination_country = "sweden"; }});
+    }
 }

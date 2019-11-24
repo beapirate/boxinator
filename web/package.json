@@ -44,7 +44,9 @@
     "copy-webpack-plugin": "^5.0.5",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.15.1",
+    "fetch-mock": "^8.0.0",
     "mocha": "^6.2.2",
+    "node-fetch": "^2.6.0",
     "sinon": "^7.5.0"
   }
 }

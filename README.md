@@ -25,9 +25,18 @@ npm test
 
 [web/test](web/test)
 
-# Run Java tests
+# run Java tests
 ```
 cd api
 gradle test
 ```
 [api/src/test/java/se/boxinator/api](api/src/test/java/se/boxinator/api)
+
+
+# run end-to-end tests
+```
+docker-compose up -d
+docker-compose exec cypress cypress run
+```
+
+[test/](test/)

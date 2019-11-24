@@ -216,10 +216,21 @@ describe('reucers/newbox', () => {
 
 
   describe("Should handle SAVE_ERROR action", () => {
-    var initstate = newbox(undefined, {type: 'CREATE_NEW_BOX' });
+    var initstate = newbox(undefined, {type: 'CREATE_NEW_BOX' });  
 
     it("Should not throw exception on empty error list", () => {
       newbox(initstate, { type: "SAVE_ERROR", response: { errors: []} });
+    })
+
+    it("Should save top level error if SAVE_ERROR includes it", () => {
+      var state = newbox(initstate, { type: "SAVE_ERROR", error: "timeout" });
+      assert.equal(state.error, "timeout");
+    })
+
+    it("Should clear top level error if next SAVE_ERROR does not include one", () => {
+      var state = newbox(initstate, { type: "SAVE_ERROR", error: "errormessage2" });
+      state = newbox(state, { type: "SAVE_ERROR" });
+      assert.equal(state.error, undefined);
     })
 
     it("Should set error from server on recipient name error property", () => {
@@ -249,6 +260,14 @@ describe('reucers/newbox', () => {
 
 
   describe("Should handle SAVE_SUCCESS action", () => {
+    var initstate = newbox(undefined, {type: 'CREATE_NEW_BOX' });
+
+    it("Should clear top level error from previous SAVE_ERROR", () => {
+      var state = newbox(initstate, { type: "SAVE_ERROR", error: "errormessage2" });
+      state = newbox(state, { type: "SAVE_SUCCESS" });
+      assert.equal(state.error, undefined);
+
+    })
 
   })
 })

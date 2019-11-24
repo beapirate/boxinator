@@ -5,7 +5,7 @@ import { ChromePicker } from 'react-color';
 import { saveBoxToApi } from '../actions';
 
 
-const BoxForm = ({ box, onRecipientNameChange, onBoxWeightChange, onColorChange, onColorClick, onDestinationCountryChange, onSave}) => {
+const BoxForm = ({ error, box, onRecipientNameChange, onBoxWeightChange, onColorChange, onColorClick, onDestinationCountryChange, onSave}) => {
 
     const boxColorHex = box.color != undefined && box.color.length == 3 ? rgb2hex(box.color[0], box.color[1], box.color[2]) : "#000000";
 
@@ -64,6 +64,9 @@ const BoxForm = ({ box, onRecipientNameChange, onBoxWeightChange, onColorChange,
                 <span> {box.destination_country && box.destination_country.error} </span>
 
                 <br />
+
+                {error &&  <span> Could not save: {error} </span>}
+
                 <input type="submit" id="box-save" value="Save" disabled={!validInputs} onClick={onSave} />
             </form>
         </div>

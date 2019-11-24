@@ -150,6 +150,10 @@ describe('components', () => {
             assert(enzymeWrapper.find("#box-save").prop('disabled'));
         })
 
-
+        it("Should include global error info if present in state", () => {
+            var { enzymeWrapper } = setup({error: "global error message", box : { "recipient_name": "RecipientName1" }})
+            const withError = enzymeWrapper.html();
+            assert(withError.indexOf("global error message") >= 0);
+        })
     })
 })

@@ -11,7 +11,6 @@ const reloadBoxesFromApi = () => {
 
       if (!isJsonResponse) {
         return response.text().then(text => {
-          // XXX - this should result in a server-error status to user
           console.error("Expected to receive JSON data from API");
           dispatch({ type: "LOAD_ERROR", error: "Invalid data from server", response: text});
         })

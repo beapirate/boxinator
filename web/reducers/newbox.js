@@ -114,7 +114,11 @@ const newbox = (state, action) => {
 
     case "SAVE_ERROR":
       var response = action.response;
-      var next = {...state};
+      var next = {...state, error: action.error};
+
+      if(!response) {
+        return next;
+      }
 
       for (let i = 0; i < response.errors.length; i++) {
         const validprops = ["recipient_name", "weight", "color", "destination_country"];
@@ -132,7 +136,9 @@ const newbox = (state, action) => {
 
       return next;
 
-    
+    case "SAVE_SUCCESS":
+      return {...state, error: undefined};
+
     default:
         return state
   }

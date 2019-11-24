@@ -65,11 +65,10 @@ const saveBoxToApi = (box) => {
             dispatch({ type: "SAVE_ERROR", response: json });
           }
         })
-      })
-      .catch(err => {
-        console.error(err);
-        dispatch({ type: "SAVE_ERROR", error: err.message });
-      })
+    }).catch(err => {
+      console.error(err);
+      dispatch({ type: "SAVE_ERROR", error: err.message });
+    })
   }
 }
 

@@ -113,6 +113,7 @@ const newbox = (state, action) => {
       return {...state, colorPickerVisible: !state.colorPickerVisible };
 
     case "SAVE_ERROR":
+      // XXX - if SAVE_ERROR action contains no .error nor any .errors... what type of error is that?
       var response = action.response;
       var next = {...state, error: action.error};
 

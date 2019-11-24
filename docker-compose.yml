@@ -30,6 +30,7 @@ services:
     working_dir: /e2e
     volumes:
       - ./test:/e2e
+    entrypoint:  sleep infinity
 
 volumes:
   static-files:

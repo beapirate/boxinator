@@ -176,13 +176,13 @@ describe('reucers/newbox', () => {
 
     it("should not allow blue boxes", () => {
       var state = newbox(initstate, {type: "SET_BOX_COLOR", color: [0, 0, 255]});
-      assert.equal(state.color.error, "blue");
+      assert.equal(state.color.error, "too blue");
 
       var state = newbox(initstate, {type: "SET_BOX_COLOR", color: [0, 255, 255]});
-      assert.equal(state.color.error, "blue");
+      assert.equal(state.color.error, "too blue");
 
       var state = newbox(initstate, {type: "SET_BOX_COLOR", color: [64, 0, 255]});
-      assert.equal(state.color.error, "blue");
+      assert.equal(state.color.error, "too blue");
     })
 
     it("should allow red and green boxes", () => {

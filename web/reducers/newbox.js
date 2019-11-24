@@ -104,7 +104,7 @@ const newbox = (state, action) => {
         color.error = "invalid";
       }
       else if(isBlue(color[0], color[1], color[2])) {
-        color.error = "blue";
+        color.error = "too blue";
       }
 
       return {...state, color: color};

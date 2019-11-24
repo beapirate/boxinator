@@ -79,5 +79,27 @@ describe('actions.js', () => {
                 done();
             }).catch(err => done(err));
         })
+
+        it("should dispatch SAVE_ERROR action on 500 text response", (done) => {
+            fetchMock.mock('/api/box', { status: 500, body: "server error"});
+            saveBoxToApi()(dispatch).then(() => {
+                assert(dispatch.calledOnce);
+                assert.deepEqual(
+                    { type: 'SAVE_ERROR', error: 'Invalid data from server', response: 'server error' },
+                    dispatch.getCall(0).args[0]);
+                done();
+            }).catch(err => done(err));
+        })
+
+        it("should dispatch SAVE_ERROR action on network error", (done) => {
+            fetchMock.mock('/api/box', { throws: new Error("connection timeout") });
+            saveBoxToApi()(dispatch).then(() => {
+                assert(dispatch.calledOnce);
+                assert.deepEqual(
+                    { type: 'SAVE_ERROR', error: "connection timeout" },
+                    dispatch.getCall(0).args[0]);
+                done();
+            }).catch(err => done(err));
+        })
     })
 })

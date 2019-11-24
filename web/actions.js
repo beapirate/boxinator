@@ -50,9 +50,11 @@ const saveBoxToApi = (box) => {
           response.headers.get('content-type').indexOf('application/json') >= 0;
 
         if (!isJsonResponse) {
-          // XXX - this should result in a server-error status to user
-          console.error("Expected to receive JSON data from API");
-          return;
+          return response.text().then(text => {
+            // XXX - this should result in a server-error status to user
+            console.error("Expected to receive JSON data from API");
+            dispatch({ type: "SAVE_ERROR", error: "Invalid data from server", response: text});
+          })
         }
 
         return response.json().then(json => {
@@ -64,7 +66,11 @@ const saveBoxToApi = (box) => {
             dispatch({ type: "SAVE_ERROR", response: json });
           }
         })
-      });
+      })
+      .catch(err => {
+        console.error(err);
+        dispatch({ type: "SAVE_ERROR", error: err.message });
+      })
   }
 }
 

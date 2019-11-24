@@ -266,6 +266,11 @@ describe('reucers/newbox', () => {
       var state = newbox(initstate, { type: "SAVE_ERROR", error: "errormessage2" });
       state = newbox(state, { type: "SAVE_SUCCESS" });
       assert.equal(state.error, undefined);
+    })
+
+    it("Should set saved in state", () => {
+      var state = newbox(initstate, { type: "SAVE_SUCCESS" });
+      assert.equal(state.saved, true);
 
     })
 

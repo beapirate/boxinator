@@ -138,7 +138,7 @@ const newbox = (state, action) => {
       return next;
 
     case "SAVE_SUCCESS":
-      return {...state, error: undefined};
+      return {...state, saved: true, error: undefined};
 
     default:
         return state

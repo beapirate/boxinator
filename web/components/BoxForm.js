@@ -32,11 +32,29 @@ const BoxForm = ({ box, onRecipientNameChange, onBoxWeightChange, onColorChange,
                 <span> {box.weight && box.weight.error} </span>
 
                 <br />Box color<br />
-                <input type="text" id="box-color" value={box.color} onClick={onColorClick}
+                <div style={{ display: "flex" }}>
+                <input type="text" id="box-color" value={boxColorHex} onClick={onColorClick}
                     className={ box.color != undefined && box.color.error != undefined ? "box-form-error" : "box-form-valid" }
                 />
-                <span style={{ color: boxColorHex }} >X</span>
-                <span> {box.color && box.color.error} </span>
+                <div style={{
+                    padding: '5px',
+                    background: '#fff',
+                    borderRadius: '1px',
+                    boxShadow: '0 0 0 1px rgba(0,0,0,.1)',
+                    display: 'inline-block',
+                    cursor: 'pointer'
+                    }}
+                    onClick={ onColorClick }>
+                    <div style={{
+                         width: '36px',
+                         height: '14px',
+                         borderRadius: '2px',
+                         background: boxColorHex,
+                    }} />
+                </div>
+                <div> {box.color && box.color.error} </div>
+                </div>
+
                 { box.colorPickerVisible && <ChromePicker color={boxColorHex} onChange={onColorChange} /> }
 
                 <br />Country<br />

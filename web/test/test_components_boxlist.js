@@ -19,9 +19,15 @@ function setup(props) {
 describe('components', () => {
     describe('BoxList', () => {
 
-        it("Should be possible to render as .html()", () => {
+        it("Should be possible to render empty list as .html()", () => {
             const { enzymeWrapper } = setup({boxes: []})
             enzymeWrapper.html();
+        })
+
+        it("Should be possible to render  as .html()", () => {
+            const { enzymeWrapper } = setup({boxes: [{recipient_name: "recipient1" }]})
+            const html = enzymeWrapper.html();
+            assert(html.indexOf("recipient1") > -1);
         })
     })
 })

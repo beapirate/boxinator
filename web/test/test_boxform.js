@@ -150,6 +150,11 @@ describe('components', () => {
             assert(enzymeWrapper.find("#box-save").prop('disabled'));
         })
 
+        it("Should not enable submit buttton if box is already saved", () => {
+            var { enzymeWrapper } = setup({box : { saved: true }})
+            assert(enzymeWrapper.find("#box-save").prop('disabled'));
+        })
+
         it("Should include global error info if present in state", () => {
             var { enzymeWrapper } = setup({error: "global error message", box : { "recipient_name": "RecipientName1" }})
             const withError = enzymeWrapper.html();

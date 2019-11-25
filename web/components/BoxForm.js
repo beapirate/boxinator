@@ -69,9 +69,16 @@ const BoxForm = ({ error, box, onRecipientNameChange, onBoxWeightChange, onColor
                 <span> {box.destination_country && box.destination_country.error} </span>
                 <br />
 
-                {error && <span> Could not save: {error} </span>}
-
-                <input type="submit" id="box-save" value="Save" disabled={!validInputs} onClick={onSave} />
+                {(() => {
+                    if(error) {
+                        return <span className="box-form-error"> Could not save: {error} </span>
+                    }
+                    if(box.saved) {
+                        return <span className="box-form-valid">Successfully saved box</span>
+                    }
+                })()}
+                <br />
+                <input type="submit" id="box-save" value="Save" disabled={!validInputs || box.saved} onClick={onSave} />
             </form>
         </div>
     )

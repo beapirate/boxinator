@@ -64,8 +64,6 @@ const BoxForm = ({ error, box, onRecipientNameChange, onBoxWeightChange, onColor
                     <option label=" "></option>
                     {validDestinationCountries.map(i => <option value={i}>{i}</option>)};
                 </select>
-
-                <br />
                 <span> {box.destination_country && box.destination_country.error} </span>
                 <br />
 

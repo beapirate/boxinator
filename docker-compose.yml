@@ -11,13 +11,17 @@ services:
       MYSQL_PASSWORD: "boxinator_test"
     tmpfs:
       - "/var/lib/mysql"
+
   api:
     build: "./api"
     volumes:
+      # hack to serve last built copy of web/ via the api for dev
+      # (web/ webpacks bundled source here on startup)
       - "static-files:/src/src/main/resources/static"
     ports:
       - "8080:8080"
 
+  # not actual services, just a convenient way to can docker commandlines...
   web:
     build: "./web"
     volumes:

@@ -5,6 +5,9 @@ import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
 
 import org.springframework.test.context.junit4.SpringRunner;
+
+import junit.framework.Assert;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
@@ -42,6 +45,18 @@ public class BoxServiceTest {
             color = "#ffffff";
             weight = 7.1f;
         }});
+    }
+
+    @Test
+    @DirtiesContext
+    public void computesShippingCost() throws Exception {
+        BoxModel created = service.Insert(new BoxModel() {{
+            recipient_name = "recipient1";
+            destination_country = "sweden";
+            color = "#ffffff";
+            weight = 7.1f;
+        }});
+        assertTrue(created.shipping_cost > 0);
     }
 
 

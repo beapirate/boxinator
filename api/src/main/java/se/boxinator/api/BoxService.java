@@ -102,25 +102,3 @@ public class BoxService {
         return box.weight * multiplier;
     }
 }
-
-class BoxError {
-    public String property;
-    public String error;
-
-    public BoxError(String property, String error) {
-        this.property = property;
-        this.error = error;
-    }
-}
-
-class BoxValidationErrors {
-    public List<BoxError> errors = new ArrayList<>();
-
-    public void AddError(String property, String error) {
-        this.errors.add(new BoxError(property, error));
-    }
-
-    public boolean Exists() {
-        return this.errors.size() > 0;
-    }
-}

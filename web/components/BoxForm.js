@@ -6,7 +6,7 @@ import { saveBoxToApi } from '../actions';
 import { validDestinationCountries } from "../util/countries";
 
 
-const BoxForm = ({ error, box, onRecipientNameChange, onBoxWeightChange, onColorChange, onColorClick, onDestinationCountryChange, onSave}) => {
+const BoxForm = ({ error, box, onRecipientNameChange, onBoxWeightChange, onColorChange, onColorClick, onDestinationCountryChange, onReset, onSave}) => {
 
     const boxColorHex = box.color != undefined && box.color.length == 3 ? rgb2hex(box.color[0], box.color[1], box.color[2]) : "#000000";
 
@@ -78,6 +78,7 @@ const BoxForm = ({ error, box, onRecipientNameChange, onBoxWeightChange, onColor
                     }
                 })()}
                 <br />
+                <button onClick={onReset}>Reset</button>
                 <input type="submit" id="box-save" value="Save" disabled={!validInputs || box.saved} onClick={onSave} />
             </form>
         </div>
@@ -110,6 +111,10 @@ const mapStateToProps = state => {
 
         onDestinationCountryChange: e => {
             dispatch({type: "SET_DESTINATION_COUNTRY", name: e.target.value})
+        },
+
+        onReset: () => {
+            dispatch({type: "CREATE_NEW_BOX"})
         },
 
         dispatch: dispatch

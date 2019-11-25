@@ -17,6 +17,10 @@ const createdefaultbox = () => {
   defaultbox.saved = false;
   defaultbox.colorPickerVisible = false;
 
+  // The .property.error used here would have been better as a separate property -> error mapping
+  // it's especially evident when checking if _any_ errors exists in BoxForm.
+  // Use String for everything since UI state may not convert to the proper data type.
+
   defaultbox. recipient_name = new String("");
   defaultbox.recipient_name.error = "required";
 

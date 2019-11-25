@@ -34,6 +34,7 @@ public class BoxService {
         return db.ping();
     }
 
+    // should probably be called Create instead...
     public BoxModel Insert(BoxModel box) throws Exception {
         BoxValidationErrors errors = Validate(box);
 

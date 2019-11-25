@@ -1,6 +1,5 @@
 package se.boxinator.api;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
@@ -14,7 +13,7 @@ import java.sql.SQLException;
 
 @Component
 @Profile("!test")
-public class BoxDatabaseSqlImpl implements BoxDatabaseInterface {
+public class BoxDatabaseSqlImpl implements BoxDatabaseInterface { 
 
     private JdbcTemplate jdbc;
 
@@ -22,10 +21,12 @@ public class BoxDatabaseSqlImpl implements BoxDatabaseInterface {
         this.jdbc = jdbc;
     }
 
+    // only used for sanity (human) check between SQL and test code.
     public String ping() {
         return "pong";
     }
 
+    // Assume that all data access is made through service
     public BoxModel Insert(BoxModel box) {
         jdbc.update(
             "INSERT INTO boxes (recipient_name, box_weight, color, destination_country) VALUES (?, ?, ?, ?)",

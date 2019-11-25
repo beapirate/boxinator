@@ -10,6 +10,9 @@ import java.util.List;
 @Profile("test")
 public class BoxDatabaseTestImpl implements BoxDatabaseInterface {
 
+    // mock database ops in Java once here so we don't have to do it in every single test
+    // (it would be beneficial to mock/spy on this and return exact results per test for more complex queries)
+
     private int serial = 0;
     private List<BoxModel> boxes = new ArrayList<>();
 

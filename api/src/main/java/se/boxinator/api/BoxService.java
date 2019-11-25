@@ -41,16 +41,13 @@ public class BoxService {
             throw new Exception("invalid box");
         }
 
-        return db.Insert(box);
+        box.shipping_cost = ComputeShippingCost(box);
 
+        return db.Insert(box);
     }
 
     public List<BoxModel> All() throws Exception {
-        List<BoxModel> all = db.All();
-        for(BoxModel i : all) {
-            i.shipping_cost = ComputeShippingCost(i);
-        }
-        return all;
+        return  db.All();
     }
 
     public BoxValidationErrors Validate(BoxModel box) {

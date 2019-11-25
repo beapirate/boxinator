@@ -10,7 +10,7 @@ module.exports = {
 
     plugins: [
       new CopyPlugin([
-        { from: 'static/*' }
+        { from: 'static/*', force: true, flatten: true }
       ])
     ],
 

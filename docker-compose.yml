@@ -30,7 +30,13 @@ services:
     working_dir: /e2e
     volumes:
       - ./test:/e2e
-    entrypoint:  sleep infinity
+    entrypoint: sleep infinity
+
+  devenv:
+    build: "./devenv"
+    volumes:
+      - ./:/src
+    command: sleep infinity
 
 volumes:
   static-files:

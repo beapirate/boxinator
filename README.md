@@ -11,9 +11,10 @@ Note that a tmpfs mount is used for mariadb data to ensure that the database is 
 
 # start container for dev and running tests
 ```
-docker run --rm -v ".:/src" it $(docker build -q ./devenv)
+docker-compose up -d devenv
+docker-compose exec devenv bash
 # in windows msys2 bash shell
-winpty docker run --rm -v /"$PWD":/src -it $(docker build -q ./devenv)
+winpty ddocker-compose exec devenv bash
 ```
 
 # run Javascript tests

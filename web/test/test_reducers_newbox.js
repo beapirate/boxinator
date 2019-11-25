@@ -242,11 +242,15 @@ describe('reucers/newbox', () => {
 
     it("Should log error to console if invalid property name is received", () => {
       var console_error = sinon.spy(console, "error");
+      after(() => {
+        console_error.restore()
+      })
+
       var state = newbox(initstate, { type: "SAVE_ERROR", response: { errors: [
         {property: "invalid_name", error: "servererror2" }
       ]} });
 
-      console_error.restore() //XXX - use test fixtures..
+      
       assert.equal(console_error.callCount, 1);
     })
 

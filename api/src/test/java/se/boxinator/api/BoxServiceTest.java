@@ -7,6 +7,7 @@ import static org.junit.Assert.*;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.boot.test.mock.mockito.SpyBean;
 
@@ -31,13 +32,26 @@ public class BoxServiceTest {
         service.Insert(new BoxModel());
     }
 
+
+    @Test
+    @DirtiesContext
+    public void validInputNoException() throws Exception {
+        service.Insert(new BoxModel() {{
+            recipient_name = "recipient1";
+            destination_country = "sweden";
+            color = "#ffffff";
+            weight = 7.1f;
+        }});
+    }
+
+
     @Test(expected = Exception.class)
     public void exceptionOnInvalidDestinationCountry() throws Exception {
         service.ComputeShippingCost(new BoxModel() {{ destination_country = "invalid"; }});
     }
 
     @Test
-    public void noExceptionOnValidCountryy() throws Exception {
+    public void noExceptionOnValidCountry() throws Exception {
         service.ComputeShippingCost(new BoxModel() {{ destination_country = "sweden"; }});
     }
 }

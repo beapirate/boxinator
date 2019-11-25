@@ -1,14 +1,6 @@
 import { rgb2hsv, hsv2hsl } from '@swiftcarrot/color-fns';
+import { isValidDestinationCountry } from "../util/countries.js";
 
-const isValidDestinationCountry = (name) => {
-  const valid = [
-    "Australia",
-    "Brazil",
-    "China",
-    "Sweden"
-  ].map(i => i.toLowerCase());
-  return valid.indexOf(name.toLowerCase()) > -1;
-}
 
 const isBlue = (r, g, b) => {
   // See https://www.w3schools.com/colors/colors_picker.asp

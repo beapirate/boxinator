@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { rgb2hex } from '@swiftcarrot/color-fns';
 import { ChromePicker } from 'react-color';
 import { saveBoxToApi } from '../actions';
+import { validDestinationCountries } from "../util/countries";
 
 
 const BoxForm = ({ error, box, onRecipientNameChange, onBoxWeightChange, onColorChange, onColorClick, onDestinationCountryChange, onSave}) => {
@@ -58,14 +59,17 @@ const BoxForm = ({ error, box, onRecipientNameChange, onBoxWeightChange, onColor
                 { box.colorPickerVisible && <ChromePicker color={boxColorHex} onChange={onColorChange} /> }
 
                 <br />Country<br />
-                <input type="text" id="box-destinationCountry" value={box.destination_country} onChange={onDestinationCountryChange}
-                    className={ box.destination_country != undefined && box.destination_country.error != undefined ? "box-form-error" : "box-form-valid" }
-                />
-                <span> {box.destination_country && box.destination_country.error} </span>
+                <select id="box-destinationCountry" onChange={onDestinationCountryChange}
+                        className={ box.destination_country != undefined && box.destination_country.error != undefined ? "box-form-error" : "box-form-valid" }>
+                    <option label=" "></option>
+                    {validDestinationCountries.map(i => <option value={i}>{i}</option>)};
+                </select>
 
                 <br />
+                <span> {box.destination_country && box.destination_country.error} </span>
+                <br />
 
-                {error &&  <span> Could not save: {error} </span>}
+                {error && <span> Could not save: {error} </span>}
 
                 <input type="submit" id="box-save" value="Save" disabled={!validInputs} onClick={onSave} />
             </form>

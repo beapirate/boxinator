@@ -8,6 +8,7 @@ WORKDIR /src
 COPY package.json /src/
 RUN npm install
 COPY components/ /src/components
+COPY util/ /src/util
 COPY reducers/ /src/reducers
 COPY static/ /src/static
 COPY index.js actions.js .babelrc webpack.config.js /src/

@@ -14,4 +14,4 @@ COPY static/ /src/static
 COPY index.js actions.js .babelrc webpack.config.js /src/
 RUN find /src | grep -v node_modules
 RUN npm run-script build
-CMD npx webpack --watch
+CMD npx webpack && sleep infinity

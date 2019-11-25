@@ -1,7 +1,20 @@
+:root {
+    --boxinator-valid-color: lawngreen;
+    --boxinator-error-color: salmon;
+}
+
 .box-form-error {
-    background-color: salmon;
+    background-color: var(--boxinator-error-color);
 }
 
 .box-form-valid {
-    background-color: lawngreen;;
+    background-color: var(--boxinator-valid-color);
+}
+
+#box-list table {
+    border-collapse: collapse;
+}
+
+#box-list  table, th, td {
+    border: 1px solid black;
 }

@@ -29,8 +29,8 @@ public class BoxDatabaseSqlImpl implements BoxDatabaseInterface {
     // Assume that all data access is made through service
     public BoxModel Insert(BoxModel box) {
         jdbc.update(
-            "INSERT INTO boxes (recipient_name, box_weight, color, destination_country) VALUES (?, ?, ?, ?)",
-            box.recipient_name, box.weight, box.color, box.destination_country);
+            "INSERT INTO boxes (recipient_name, box_weight, color, destination_country, shipping_cost) VALUES (?, ?, ?, ?, ?)",
+            box.recipient_name, box.weight, box.color, box.destination_country, box.shipping_cost);
         return box;
     }
 
@@ -49,6 +49,7 @@ class BoxRowMapper implements RowMapper<BoxModel> {
         box.weight = rs.getFloat("box_weight");
         box.color = rs.getString("color");
         box.destination_country = rs.getString("destination_country");
+        box.shipping_cost = rs.getFloat("shipping_cost");
         return box;
     }
 }

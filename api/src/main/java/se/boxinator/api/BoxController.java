@@ -39,9 +39,7 @@ public class BoxController {
             return ResponseEntity.badRequest().body(errors);
         }
 
-        float cost = db.ComputeShippingCost(box);
         BoxModel created = db.Insert(box);
-        created.shipping_cost = cost;
 
         // XXX - return object created by service (with box_id set)
         return ResponseEntity.status(201).body(created);

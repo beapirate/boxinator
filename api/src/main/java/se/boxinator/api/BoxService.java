@@ -8,6 +8,10 @@ import java.util.Map;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+
+// This kind of service...
+// https://docs.microsoft.com/en-us/aspnet/mvc/overview/older-versions-1/models-data/validating-with-a-service-layer-cs
+
 @Service
 public class BoxService {
 
@@ -53,7 +57,8 @@ public class BoxService {
 
         BoxValidationErrors errors = new BoxValidationErrors();
 
-        // The validation here _SHOULD_ matche the validation in ../web/reducers/newbox.js
+        // The validation here _SHOULD_ match the validation in ../web/reducers/newbox.js
+        // implementing some of it to prove the point should suffice.
 
         if(box.box_id >= 0) {
             errors.AddError("box_id", "box_id property not allowed when creating a new box");

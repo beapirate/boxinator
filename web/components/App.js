@@ -16,14 +16,11 @@ const App = () => (
       <div>
         <nav>
           <ul>
-            <li>
-              <Link to="/">Home</Link>
+          <li>
+              <Link to="/listboxes">List</Link>
             </li>
             <li>
               <Link to="/addbox">Add</Link>
-            </li>
-            <li>
-              <Link to="/listboxes">List</Link>
             </li>
           </ul>
         </nav>
